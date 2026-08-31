@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "connect-sqlite3": "^0.9.16",
     "dotenv": "^17.4.2",
     "ejs": "^5.0.2",
     "express": "^5.2.1",
@@ -11,9 +10,10 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-usestateref": "^2.0.0",
+    "socket": "^1.1.162",
     "socket.io": "^4.8.1",
     "sqlite3": "^6.0.1",
-    "tsx": "^4.21.0"
+    "tsx": "^4.23.13"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",

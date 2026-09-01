@@ -38,8 +38,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 const PORT = process.env.PORT || 3000;
-const PUBLIC_HOST = process.env.PUBLIC_HOST || process.env.HOST || "172.16.3.115";
-const HOST = process.env.HOST || PUBLIC_HOST || "0.0.0.0";
+const HOST = "0.0.0.0";
 const uploadsDir = path.join(__dirname, "public", "uploads");
 const albumsDir = path.join(__dirname, "public", "albums");
 
@@ -982,7 +981,7 @@ const startServer = async () => {
 	await new Promise((resolve, reject) => {
 		server.once("error", reject);
 		server.listen(PORT, HOST, () => {
-			console.log(`Server listening at http://${PUBLIC_HOST}:${PORT}`);
+			console.log(`Server listening on port ${PORT}`);
 			resolve();
 		});
 	});

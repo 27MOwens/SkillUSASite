@@ -49,4 +49,63 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+    const heroMedia = document.querySelector(".hero-home .hero-media");
+
+  if (heroMedia) {
+    const heroImages = [
+      "/yts_20241115_54158065724_o.jpg",
+      "/yts_20251120_55057350316_o.jpg",
+      "/yts_20251120_55057350346_o.jpg"
+    ];
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    heroMedia.style.setProperty("--hero-current", `url("${heroImages[0]}")`);
+
+    if (!reduceMotion) {
+      heroImages.slice(1).forEach((src) => {
+        const image = new Image();
+        image.src = src;
+      });
+
+      let currentImage = 0;
+
+      window.setInterval(() => {
+        const nextImage = (currentImage + 1) % heroImages.length;
+
+        heroMedia.style.setProperty(
+          "--hero-next",
+          `url("${heroImages[nextImage]}")`
+        );
+
+        heroMedia.classList.add("is-sliding");
+
+        window.setTimeout(() => {
+          currentImage = nextImage;
+
+          const followingImage =
+            (currentImage + 1) % heroImages.length;
+
+          heroMedia.style.setProperty(
+            "--hero-current",
+            `url("${heroImages[currentImage]}")`
+          );
+
+          heroMedia.style.setProperty(
+            "--hero-next",
+            `url("${heroImages[followingImage]}")`
+          );
+
+          heroMedia.classList.add("no-transition");
+          heroMedia.classList.remove("is-sliding");
+
+          requestAnimationFrame(() => {
+            heroMedia.classList.remove("no-transition");
+          });
+        }, 900);
+      }, 5000);
+    }
+  }
 });
